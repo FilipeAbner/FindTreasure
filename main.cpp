@@ -1,5 +1,5 @@
 #include <GL/glut.h>
-#include "game.hpp"
+#include "src/game/game.hpp"
 
 int main(int argc, char **argv)
 {
