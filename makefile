@@ -1,5 +1,7 @@
 MAIN = jogo
-OBJECTS = main.o game.o
+BUILD_DIR = build
+SRC = main.cpp game.cpp
+OBJECTS = $(SRC:%.cpp=$(BUILD_DIR)/%.o)
 FLAGS = -std=c++17 -pedantic-errors -g
 
 
@@ -20,20 +22,23 @@ else
 endif
 STB_INCLUDE_DIR = /usr/include/stb
 
-all: $(MAIN)$(EXE)
+all: $(BUILD_DIR)/$(MAIN)$(EXE)
 
-# rule for generating the executable file
-$(MAIN)$(EXE): $(OBJECTS)
-	$(CC) $(OBJECTS) -o $(MAIN)$(EXE) $(FLAGS) $(OPENGL_FLAG) $(MATH) $(LDFLAGS)
+# create build dir if dont exists
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
 
-# object compilation rule (ensuring that all objects use the -g flag)
-$(OBJECTS): %.o: %.cpp
+$(BUILD_DIR)/$(MAIN)$(EXE): $(OBJECTS)
+	$(CC) $(OBJECTS) -o $@ $(FLAGS) $(OPENGL_FLAG) $(MATH) $(LDFLAGS)
+
+# compile inside build dir
+$(BUILD_DIR)/%.o: %.cpp | $(BUILD_DIR)
 	$(CC) -c $< -o $@ $(FLAGS) -I$(STB_INCLUDE_DIR)
 
 # Clean Proejct
 clean:
-	$(RM) $(OBJECTS) $(MAIN)$(EXE)
+	$(RM) $(BUILD_DIR)
 
 # compile and run
 run: all
-	./$(MAIN)$(EXE)
+	./$(BUILD_DIR)/$(MAIN)$(EXE)
