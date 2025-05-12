@@ -68,35 +68,35 @@ void initTextures()
     if (wallTextureID == 0)
     {
         std::cerr << "Erro ao carregar a textura do labirinto!" << std::endl;
-        exit(EXIT_FAILURE); // Sai do programa se a textura falhar
+        exit(EXIT_FAILURE); // Exit the program if the texture fails
     }
 
     PlayerTextureID = loadTexture("img/assets/Player.png");
     if (PlayerTextureID == 0)
     {
         std::cerr << "Erro ao carregar a textura do Player!" << std::endl;
-        exit(EXIT_FAILURE); // Sai do programa se a textura falhar
+        exit(EXIT_FAILURE); // Exit the program if the texture fails
     }
 
     TreasureTextureID = loadTexture("img/assets/Treasure.png");
     if (TreasureTextureID == 0)
     {
         std::cerr << "Erro ao carregar a textura do Tesouro!" << std::endl;
-        exit(EXIT_FAILURE); // Sai do programa se a textura falhar
+        exit(EXIT_FAILURE); // Exit the program if the texture fails
     }
 
     WinTextureID = loadTexture("img/assets/Win.png");
     if (WinTextureID == 0)
     {
         std::cerr << "Erro ao carregar a textura de Win!" << std::endl;
-        exit(EXIT_FAILURE); // Sai do programa se a textura falhar
+        exit(EXIT_FAILURE); // Exit the program if the texture fails
     }
 
     FloorTextureID = loadTexture("img/assets/floor.png");
     if (FloorTextureID == 0)
     {
         std::cerr << "Erro ao carregar a textura de Floor!" << std::endl;
-        exit(EXIT_FAILURE); // Sai do programa se a textura falhar
+        exit(EXIT_FAILURE); // Exit the program if the texture fails
     }
 }
 
@@ -118,7 +118,7 @@ GLuint loadTexture(const char *filename)
     glGenTextures(1, &textureID);
     glBindTexture(GL_TEXTURE_2D, textureID);
 
-    // Configuração de parâmetros da textura
+    // Texture parameter configuration
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -133,8 +133,8 @@ GLuint loadTexture(const char *filename)
 
 void drawPlayer()
 {
-    glColor3f(predefinedColors[WHITE].cor[0], predefinedColors[WHITE].cor[1], predefinedColors[WHITE].cor[2]); // Garante que a textura não seja afetada por cores anteriores
-    glBindTexture(GL_TEXTURE_2D, PlayerTextureID);                                                             // Usa a textura do personagem
+    glColor3f(predefinedColors[WHITE].cor[0], predefinedColors[WHITE].cor[1], predefinedColors[WHITE].cor[2]); // Ensures that the texture is not affected by previous colors
+    glBindTexture(GL_TEXTURE_2D, PlayerTextureID);                                                             // Uses the character's texture
     glEnable(GL_TEXTURE_2D);
 
     glBegin(GL_QUADS);
@@ -192,7 +192,7 @@ void display()
         drawText(score_str.c_str(), 0.8f, 0.4f, predefinedColors[GOLD], predefinedColors[GRAY]);
     }
     else if (gameOver)
-    { // tela de game over
+    { // game over screen
         drawGameOver();
     }
     else
@@ -264,12 +264,12 @@ void keyboard(unsigned char key, int x, int y)
     glutPostRedisplay();
 }
 
-// Texto com Sombra
+// Text with Shadow
 void drawText(const char *text, float x, float y, Colors textColor, Colors shadowColor)
 {
-    // Desenhar sombra com deslocamento
+    // Draw shadow with offset
     glColor3f(shadowColor.cor[0], shadowColor.cor[1], shadowColor.cor[2]);
-    glRasterPos2f(x + 0.015f, y - 0.015f); // Pequeno deslocamento para a sombra
+    glRasterPos2f(x + 0.015f, y - 0.015f); // Small shift to the shadow
     const char *t = text;
     while (*t)
     {
@@ -277,7 +277,7 @@ void drawText(const char *text, float x, float y, Colors textColor, Colors shado
         t++;
     }
 
-    // Desenhar texto principal
+    // Draw main text
     glColor3f(textColor.cor[0], textColor.cor[1], textColor.cor[2]);
     glRasterPos2f(x, y);
     while (*text)
@@ -320,7 +320,7 @@ void loadMaze(const char *file_name)
     string value;
     stringstream ss;
 
-    // lê a linha que contém o tamanho do labirinto
+    // read the line containing the maze size
     getline(file, linha);
     ss = stringstream(linha);
 
@@ -331,7 +331,7 @@ void loadMaze(const char *file_name)
 
     maze.grid = vector<vector<char>>(maze.rows, vector<char>(maze.cols));
 
-    // lê a linha que contém a posição inicial do jogador
+    // read the line containing the player's initial position
     getline(file, linha);
     ss = stringstream(linha);
 
@@ -343,7 +343,7 @@ void loadMaze(const char *file_name)
     maze.startCol = stoi(value);
     playerX = maze.startCol;
 
-    // lê labirinto
+    // read maze
     for (int i = 0; i < maze.rows; i++)
     {
         getline(file, linha);
@@ -368,9 +368,9 @@ void drawMaze()
         for (int j = 0; j < maze.cols; j++)
         {
             if (maze.grid[i][j] == '1')
-            {                                                                                                              // Paredes do labirinto
-                glColor3f(predefinedColors[WHITE].cor[0], predefinedColors[WHITE].cor[1], predefinedColors[WHITE].cor[2]); // Garante que a textura não seja afetada por cores anteriores
-                glBindTexture(GL_TEXTURE_2D, wallTextureID);                                                               // Reutiliza a textura carregada
+            {                                                                                                              // Maze Walls
+                glColor3f(predefinedColors[WHITE].cor[0], predefinedColors[WHITE].cor[1], predefinedColors[WHITE].cor[2]); // Ensures that the texture is not affected by previous colors
+                glBindTexture(GL_TEXTURE_2D, wallTextureID);                                                               // Reuse the loaded texture
                 glEnable(GL_TEXTURE_2D);
 
                 glBegin(GL_QUADS);
@@ -390,7 +390,7 @@ void drawMaze()
             {
                 glColor3f(predefinedColors[YELLOW_GREEN].cor[0], predefinedColors[YELLOW_GREEN].cor[1], predefinedColors[YELLOW_GREEN].cor[2]);
                 // glColor3f(predefinedColors[WHITE].cor[0], predefinedColors[WHITE].cor[1], predefinedColors[WHITE].cor[2]); // Garante que a textura não seja afetada por cores anteriores
-                glBindTexture(GL_TEXTURE_2D, TreasureTextureID); // Reutiliza a textura carregada
+                glBindTexture(GL_TEXTURE_2D, TreasureTextureID); // Reuse the loaded texture
                 glEnable(GL_TEXTURE_2D);
 
                 glBegin(GL_QUADS);
@@ -408,8 +408,8 @@ void drawMaze()
             }
             else if(maze.grid[i][j] == '0')
             {
-                glColor3f(predefinedColors[WHITE].cor[0], predefinedColors[WHITE].cor[1], predefinedColors[WHITE].cor[2]); // Garante que a textura não seja afetada por cores anteriores
-                glBindTexture(GL_TEXTURE_2D, FloorTextureID);                                                               // Reutiliza a textura carregada
+                glColor3f(predefinedColors[WHITE].cor[0], predefinedColors[WHITE].cor[1], predefinedColors[WHITE].cor[2]); // Ensures that the texture is not affected by previous colors
+                glBindTexture(GL_TEXTURE_2D, FloorTextureID);                                                               // Reuse the loaded texture
                 glEnable(GL_TEXTURE_2D);
 
                 glBegin(GL_QUADS);
@@ -457,7 +457,7 @@ void drawGameOver()
     static int frameCount = 0;
     frameCount++;
     if (frameCount > 30)
-    { // Alterna visibilidade a cada 30 frames
+    { // Toggle visibility every 30 frames
         visible = !visible;
         frameCount = 0;
     }
@@ -475,7 +475,7 @@ void drawGameOver()
         float centerX = maze.cols / 2.0f;
         float centerY = maze.rows / 2.0f;
 
-        // Criando efeito de sombra 3D
+        // Creating 3D shadow effect
         drawText("GAME OVER", centerX - 1.2f, centerY, predefinedColors[RED], predefinedColors[DARK_ORANGE]);
         drawText("Press R to Try Again", centerX - 2.0f, centerY - 1.2f, predefinedColors[RED], predefinedColors[DARK_ORANGE]);
     }
@@ -488,22 +488,22 @@ void drawVictory()
     static int frameCount = 0;
     frameCount++;
     if (frameCount > 30)
-    { // Alterna visibilidade a cada 30 frames
+    { // Toggle visibility every 30 frames
         visible = !visible;
         frameCount = 0;
     }
-    glColor3f(1.0f, 1.0f, 1.0f);                // Garante que a textura não seja afetada por cores anteriores
-    glBindTexture(GL_TEXTURE_2D, WinTextureID); // Usa a textura de vitória
+    glColor3f(1.0f, 1.0f, 1.0f);                // Ensures that the texture is not affected by previous colors
+    glBindTexture(GL_TEXTURE_2D, WinTextureID); // Use the victory texture
     glEnable(GL_TEXTURE_2D);
 
-    float winWidth = 3 * squareSize;  // Define a largura da imagem (ajuste conforme necessário)
-    float winHeight = 3 * squareSize; // Define a altura da imagem (ajuste conforme necessário)
+    float winWidth = 3 * squareSize;  // Set the width of the image (adjust as needed)
+    float winHeight = 3 * squareSize; // Sets the height of the image (adjust as needed)
 
     float centerX = maze.cols / 2.0f;
     float centerY = maze.rows / 2.0f;
 
-    float offsetX = 1.0f;  // Ajuste fino para centralização
-    float offsetY = -1.2f; // Mantendo o ajuste que você já fez
+    float offsetX = 1.0f;  // Fine-tuning for centering
+    float offsetY = -1.2f; // Keeping the adjustment you already made
 
     glBegin(GL_QUADS);
     glTexCoord2f(0.0f, 0.0f);

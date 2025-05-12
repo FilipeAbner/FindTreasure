@@ -4,7 +4,7 @@
 #include "maze.hpp"
 #include <GL/glut.h>
 
-// Enumeração de cores
+// Color enumeration
 enum Color
 {
     RED,
@@ -33,12 +33,12 @@ enum Color
     DARK_GREEN
 };
 
-// Definição da estrutura Colors
+// Definition of the Colors structure
 struct Colors
 {
     float cor[3];
 
-    // Construtor para facilitar a inicialização
+    // Constructor to facilitate initialization
     Colors(float r, float g, float b)
     {
         cor[0] = r;
@@ -46,7 +46,7 @@ struct Colors
         cor[2] = b;
     }
 };
-// Declaração do array de cores predefinidas (extern para evitar múltiplas definições)
+// Declaring the array of predefined colors (extern to avoid multiple definitions)
 extern const Colors predefinedColors[];
 extern GLuint WinTextureID;
 

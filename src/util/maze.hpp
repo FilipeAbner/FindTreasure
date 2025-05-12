@@ -1,7 +1,7 @@
 #pragma once
 #define _MAZE_HPP_
 #include <vector>
-// Estruturas globais
+// Global Structures
 struct Maze
 {
     std::vector<std::vector<char>> grid;
