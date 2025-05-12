@@ -1,41 +1,40 @@
 MAIN = jogo
 BUILD_DIR = build
-SRC = main.cpp game.cpp
+SRC = main.cpp src/game/game.cpp
 OBJECTS = $(SRC:%.cpp=$(BUILD_DIR)/%.o)
 FLAGS = -std=c++17 -pedantic-errors -g
 
-
 # operating system identification
 ifeq ($(OS),Windows_NT)
-# Settings for Windows
-    CC = x86_64-w64-mingw32-g++  # Cross-compiler
+    CC = x86_64-w64-mingw32-g++  # Cross-compiler for Windows
     OPENGL_FLAG = -lopengl32 -lglu32 -lfreeglut
     RM = rm
     EXE = .exe
 else
-# Settings for Linux (Ubuntu)
-    CC = g++
+    CC = g++  # Default compiler for Linux
     OPENGL_FLAG = -lGL -lGLU -lglut -lGLEW
     LDFLAGS = -L/usr/lib
-    MATH = -lm # math functions (sin, cos, sqrt, etc.)
+    MATH = -lm  # math functions (sin, cos, sqrt, etc.)
     RM = rm -rf
 endif
-STB_INCLUDE_DIR = /usr/include/stb
 
+# header include directories
+STB_INCLUDE_DIR = /usr/include/stb
+INCLUDE_DIRS = -I$(STB_INCLUDE_DIR) -Isrc/game
+
+# default target: build executable
 all: $(BUILD_DIR)/$(MAIN)$(EXE)
 
-# create build dir if dont exists
-$(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
-
+# rule for generating the executable file
 $(BUILD_DIR)/$(MAIN)$(EXE): $(OBJECTS)
 	$(CC) $(OBJECTS) -o $@ $(FLAGS) $(OPENGL_FLAG) $(MATH) $(LDFLAGS)
 
-# compile inside build dir
-$(BUILD_DIR)/%.o: %.cpp | $(BUILD_DIR)
-	$(CC) -c $< -o $@ $(FLAGS) -I$(STB_INCLUDE_DIR)
+# compile each source file and create the output directory if needed
+$(BUILD_DIR)/%.o: %.cpp
+	mkdir -p $(dir $@)
+	$(CC) -c $< -o $@ $(FLAGS) $(INCLUDE_DIRS)
 
-# Clean Proejct
+# remove all compiled files
 clean:
 	$(RM) $(BUILD_DIR)
 
