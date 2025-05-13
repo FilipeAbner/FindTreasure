@@ -1,6 +1,6 @@
 MAIN = jogo
 BUILD_DIR = build
-SRC = main.cpp src/game/game.cpp src/game/textures.cpp
+SRC = src/main.cpp src/game/game.cpp src/game/textures.cpp
 OBJECTS = $(SRC:%.cpp=$(BUILD_DIR)/%.o)
 FLAGS = -std=c++17 -pedantic-errors -g
 

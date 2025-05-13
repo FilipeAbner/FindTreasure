@@ -1,6 +1,6 @@
 #include <GL/glut.h>
-#include "src/game/game.hpp"
-#include "src/util/adjust_directory.cpp"
+#include "game/game.hpp"
+#include "util/adjust_directory.cpp"
 
 int main(int argc, char **argv)
 {
