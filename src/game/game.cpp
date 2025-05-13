@@ -304,7 +304,7 @@ void timer(int value)
 
 void initGL()
 {
-    mapFileName = "mapa.txt";
+    mapFileName = "src/util/map.txt";
     initTextures();
     loadMaze(mapFileName.c_str());
     glMatrixMode(GL_PROJECTION);
