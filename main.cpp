@@ -1,8 +1,10 @@
 #include <GL/glut.h>
 #include "src/game/game.hpp"
+#include "src/util/adjust_directory.cpp"
 
 int main(int argc, char **argv)
 {
+    setWorkingDirectoryToProjectRoot();
     glutInit(&argc, argv);
     glutInitWindowSize(600, 600);
     glutCreateWindow("Labirinth");
