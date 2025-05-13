@@ -8,6 +8,11 @@
 // Declaring the array of predefined colors (extern to avoid multiple definitions)
 extern const Colors predefinedColors[];
 extern GLuint WinTextureID;
+extern GLuint wallTextureID;
+extern GLuint PlayerTextureID;
+extern GLuint TreasureTextureID;
+extern GLuint WinTextureID;
+extern GLuint FloorTextureID;
 
 void display();
 void keyboard(unsigned char key, int x, int y);
