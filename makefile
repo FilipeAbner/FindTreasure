@@ -20,7 +20,7 @@ endif
 
 # header include directories
 STB_INCLUDE_DIR = /usr/include/stb
-INCLUDE_DIRS = -I$(STB_INCLUDE_DIR) -Isrc/game
+INCLUDE_DIRS = -I$(STB_INCLUDE_DIR) -Isrc
 
 # default target: build executable
 all: $(BUILD_DIR)/$(MAIN)$(EXE)

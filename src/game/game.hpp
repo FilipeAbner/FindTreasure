@@ -1,7 +1,7 @@
 #pragma once
 #define _GAME_HPP_
 
-#include "maze.hpp"
+#include "util/maze.hpp"
 #include <GL/glut.h>
 
 // Color enumeration
