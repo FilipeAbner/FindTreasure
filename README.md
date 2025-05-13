@@ -124,7 +124,7 @@ src/
    ```bash
    make run
    ```
-   ou
+   or
    ```bash
    make && ./build/jogo
    ```
