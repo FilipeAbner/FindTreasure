@@ -1,3 +1,5 @@
+[Leia esta página em português](README-ptbr.md)
+
 # FindTreasure: 2D Maze Adventure in OpenGL
 
 ![C++17](https://img.shields.io/badge/C%2B%2B-17-blue)
@@ -11,60 +13,62 @@
   <img src="img/docs/gameplay.gif" alt="" />
 </p>
 
-## Introdução
+##  Introduction
 
-**FindTreasure** é uma aplicação interativa desenvolvida em C++ com OpenGL/GLUT, que desafia o jogador a explorar um labirinto em 2D, coletar tesouros e evitar obstáculos. O projeto enfatiza conceitos fundamentais de computação gráfica, design modular e manipulação de arquivos externos, consolidando habilidades essenciais para desenvolvimento de jogos.
+**FindTreasure** is an interactive application developed in C++ with OpenGL/GLUT, which challenges the player to explore a 2D maze, collecting treasures and avoiding obstacles. The project emphasizes fundamental concepts of computer graphics, modular design and handling of external files, consolidating essential skills for game development.
 
-Este projeto serve como exercício prático de:
+This project serves as a practical exercise in:
 
-* **Computação Gráfica 2D**: renderização de formas e texturas usando o pipeline OpenGL.
-* **Design Modular**: separação clara de responsabilidades em diferentes módulos (lógica de jogo, renderização, carregamento de recursos).
-* **Processamento de Arquivos**: leitura dinâmica de mapas a partir de arquivos TXT externos.
+* **2D Computer Graphics**: rendering of shapes and textures using the OpenGL pipeline.
 
-### Formato de Entrada
+* **Modular Design**: clear separation of responsibilities in different modules (game logic, rendering, resource loading).
 
-O mapa do labirinto é definido em um arquivo de texto com o seguinte formato:
+* **File Processing**: dynamic reading of maps from external TXT files.
+
+### Input Format
+
+The maze map is defined in a text file with the following format:
 
 ```
-<N> <M>                   # Número de linhas (N) e colunas (M)
-<start_row> <start_col>   # Posição inicial do jogador (linha e coluna)
-<linha1>                  # Sequência de N linhas, cada uma com M               elementos separados por espaço
-<linha2>
+<N> <M> # Number of rows (N) and columns (M)
+<start_row> <start_col> # Starting position of the player (row and column)
+<row1> # Sequence of N rows, each with M elements separated by spaces
+<row2>
 ...
-<linhaN>
+<rowN>
 ```
 
-Cada elemento da matriz pode ser:
+Each element of the array can be:
 
-* `0`: espaço livre onde o jogador pode se mover.
-* `1`: parede que bloqueia o caminho.
-* `*`: tesouro que deve ser coletado.
+* `0`: free space where the player can move.
+* `1`: wall blocking the path.
+* `*`: treasure that must be collected.
 
-#### Exemplo de arquivo de [entrada](!src/entries/map.txt):
+#### Example [entry](!src/entries/map.txt) file:
 ```txt
 5 6
 1 1
-1 1 1 1 1 1
+1 1 1 1 1 1 1
 1 0 0 1 * 1
 1 * 0 0 0 1
 1 1 1 * 0 1
 1 1 1 1 1 1
 ```
 
-Com esse formato, é possível criar e testar múltiplos cenários dinamicamente, basta alterar ou adicionar novos arquivos de mapa.
+With this format, you can create and test multiple scenarios dynamically by simply changing or adding new map files.
 
 ### Assets
-Todos os recursos visuais projeto foram obtidos a partir de bibliotecas públicas ou criados e editados manualmente para garantir uma identidade própria ao FindTreasure. Texturas e ícones utilizados são licenciados para uso livre ou derivados de arquivos open‑source, tendo passado por ajustes de cores, dimensões e formatos para manter a consistência estética e funcionalidade no ambiente OpenGL.
+All visual resources for the project were obtained from public libraries or created and edited manually to ensure FindTreasure's own identity. Textures and icons used are licensed for free use or derived from open-source files, having undergone color, size and format adjustments to maintain aesthetic consistency and functionality in the OpenGL environment.
 
-### Objetivos e Funcionalidades
+### Objectives and Features
 
-* **Renderização de Labirinto:** Leitura de mapas em formato TXT e conversão em matriz para desenhar paredes, caminhos e tesouros.
-* **Movimentação e Colisão:** Controle do jogador via teclado (`W`, `A`, `S`, `D`), com detecção de colisões para impedir atravessar paredes.
-* **Coleta de Tesouros:** Lógica para remoção de itens do mapa ao coletar, atualizando pontuação em tempo real.
-* **Interface de Usuário (HUD):** Exibição de tempo decorrido e quantidade de tesouros coletados na tela.
-* **Telas de Fim de Jogo:** Mensagens de vitória e derrota, apresentando tempo final e condições de reinício.
+* **Maze Rendering:** Reading maps in TXT format and converting them into a matrix to draw walls, paths and treasures.
+* **Movement and Collision:** Player control via keyboard (`W`, `A`, `S`, `D`), with collision detection to prevent passing through walls.
+* **Treasure Collection:** Logic for removing items from the map when collected, updating the score in real time.
+* **User Interface (HUD):** Display of elapsed time and amount of treasures collected on the screen.
+* **End of Game Screens:** Victory and defeat messages, showing final time and restart conditions.
 
-### Estrutura do Projeto
+### Project Structure
 
 ```
 FindTreasure/
@@ -89,39 +93,33 @@ src/
 └── 
 ```
 
-### Habilidades Demonstradas
+### How to Run
 
-* **Programação C++ Avançada:** Modularização, classes e métodos, tratamento de arquivos e strings.
-* **OpenGL/GLUT:** Pipeline de renderização 2D, texturas, manipulação de buffers e coordenadas.
-* **Debugging e Otimização:** Gerenciamento de timers, callbacks eficientes e lógica de colisão.
+1. **Prerequisites:**
 
-### Como Executar
-
-1. **Pré-requisitos:**
-
-   * Compilador C++ compatível com C++11 ou superior (por exemplo, gcc-13/g++-13).
-   * CMake e ferramentas de compilação:
+    * C++ compiler compatible with C++11 or higher (e.g. gcc-13/g++-13).
+    * CMake and build tools:
 
      ```bash
      sudo apt update
      sudo apt install gcc-13 g++-13 cmake build-essential
      ```
-   * Bibliotecas OpenGL e utilitários:
+   * OpenGL Libraries and Utilities:
 
      ```bash
      sudo apt install libglew-dev freeglut3-dev mesa-utils
      ```
-   * Biblioteca stb\_image:
+   * stb\_image library:
 
      ```bash
      sudo apt install libstb-dev
      ```
-2. **Compilação:**
+2. **Compilation:**
 
    ```bash
    make
    ```
-3. **Execução:**
+3. **Execution:**
 
    ```bash
    make run
@@ -131,12 +129,17 @@ src/
    make && ./build/jogo
    ```
 
+### Suggestions for future improvements
 
-### Sugestões de Melhorias futuras
+* **Level System:** Implement multiple maps with increasing difficulty.
+* **Enemies:** Add enemies that chase the player.
+* **Animations and Effects:** Smooth transitions, particles when collecting treasure.
 
-* **Sistema de Níveis:** Implementar múltiplos mapas com dificuldades crescentes.
-* **Inimigos:** Adicionar inimigos que perseguem o jogador.
-* **Animações e Efeitos:** Transições suaves, partículas ao coletar tesouro.
+### Skills
+
+* **Advanced C++ Programming:** Modularization, classes and methods, file and string handling.
+* **OpenGL/GLUT:** 2D rendering pipeline, textures, buffer and coordinate manipulation.
+* **Debugging and Optimization:** Timer management, efficient callbacks and collision logic.
 
 ## Developers
 
