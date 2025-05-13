@@ -203,7 +203,7 @@ void timer(int value)
 
 void initGL()
 {
-    mapFileName = "src/util/map.txt";
+    mapFileName = "src/entries/map.txt";
     initTextures();
     loadMaze(mapFileName.c_str());
     glMatrixMode(GL_PROJECTION);

@@ -5,7 +5,7 @@ int main(int argc, char **argv)
 {
     glutInit(&argc, argv);
     glutInitWindowSize(600, 600);
-    glutCreateWindow("Labirinto");
+    glutCreateWindow("Labirinth");
 
     initGL();
     glutDisplayFunc(display);
